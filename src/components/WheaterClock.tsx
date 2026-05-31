@@ -25,7 +25,7 @@ export default function WeatherClock() {
                         <p>{weather.country} :. {weather.province} :. {weather.city}</p>
                         <p>{switchSuhu ? weather.temp_f : weather.temp_c}° {switchSuhu ? "F" : "C"} <span className={s.temperature}>{temperature}</span></p>
                         
-                        {/* <button className={s.switch_temperature} onClick={() => setSwitchSuhu(prev => !prev)}><Thermometer/></button> */}
+                        <button style={{display: 'none'}} className={s.switch_temperature} onClick={() => setSwitchSuhu(prev => !prev)}></button>
                     </>
                 )}
             </div>

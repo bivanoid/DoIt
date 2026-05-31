@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'work sans';
-  src: url('./assets/fonts/WorkSans.woff2');
+  src: url('./assets/fonts/WorkSans.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'kode mono';
-  src: url('./assets/fonts/degular-semibold.ttf');
+  font-family: 'degular';
+  src: url('./assets/fonts/degular-semibold.woff2') format('woff2');
 }
 :root {
 --dark1: #edf6f9; 
@@ -27,7 +27,7 @@
 
   --p-body: 2rem;
 
-  --font1: 'kode mono';
+  --font1: 'degular';
   --font2: 'work sans';
 }
 
