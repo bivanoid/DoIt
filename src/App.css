@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'work sans';
+  src: url('./assets/fonts/WorkSans.woff2');
+}
+@font-face {
+  font-family: 'kode mono';
+  src: url('./assets/fonts/degular-semibold.ttf');
+}
+:root {
+--dark1: #edf6f9; 
+--dark2: #E7F3F6; 
+--dark3: #d4dfe3; 
+--cl4: #141414;
+
+  --gray1: #353535;
+  --cl1: #006D77;
+
+  --light1: #181818;
+
+  --danger: #bc4b51;
+  --warning: #f4a259;
+  --ok: #5b8e7d;
+
+  /* --danger: #ef476f;
+  --warning: #ffd166;
+  --ok: #06d6a0; */
+
+  --p-body: 2rem;
+
+  --font1: 'kode mono';
+  --font2: 'work sans';
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font2) !important;
+  user-select: none;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:is(h1,h2,h3,h4,h5,h6) {
+  font-family: var(--font1) !important;
+  font-weight: 500 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  width: 100%;
+  background-color: var(--dark1);
+}

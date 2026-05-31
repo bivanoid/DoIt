@@ -1,0 +1,39 @@
+.con_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    gap: 1rem;
+    background-color: var(--dark1);
+    padding-block: calc(var(--p-body) * 2);
+    padding-bottom: 0;
+    padding-bottom: 1rem;
+    padding-inline: clamp(10vw, 10vw, 45vw);
+    @media (min-width:1024px) {
+        padding-inline: clamp(20vw, 10vw, 45vw);
+    }
+}
+
+.title h1:nth-child(1) {
+    color: var(--cl4);
+    font-size: clamp(4.5rem, 10vw, 5.5rem);
+    font-family: var(--font1);
+}
+
+.wheater p:nth-child(2) {
+    font-family: var(--font1) !important;
+    font-weight: 800 !important;
+    font-size: 1.5rem;
+}
+
+.temperature {
+    scale: 0.9;
+    transform: translateY(5px);
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+}
+
