@@ -20,7 +20,7 @@ export function useWeather() {
     useEffect(() => {
         const fetchWeather = async () => {
             try {
-                const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+                const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
                 const res = await fetch(
                     `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=Surakarta&aqi=no`
                 );

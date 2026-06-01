@@ -125,8 +125,4 @@
         flex-direction: column;
         gap: 1rem;
     }
-
-    .group {
-        flex: 0;
-    }
 }

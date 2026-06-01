@@ -102,6 +102,8 @@
     height: stretch;
     flex-direction: column;
     padding-block: var(--p-body);
+    grid-column: 2;
+    flex: 1;
 }
 
 .empty_state h3 {
@@ -110,8 +112,15 @@
 
 .empty_state p {
     color: var(--gray1);
+    text-align: center;
 }
 
 .empty_state svg {
     color: var(--ok);
+}
+
+@media (max-width:747px) {
+    .group {
+        flex: 0;
+    }
 }

@@ -1,5 +1,5 @@
 import { CalendarCheckIcon } from 'lucide-react'
-import type { Todo } from '../data/db'  // ← tambah ini
+import type { Todo } from '../data/db' 
 import TodoItem from './TodoItem'
 import s from './TodoList.module.css'
 
