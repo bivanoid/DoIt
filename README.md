@@ -14,7 +14,10 @@
 5. Notifikasi Deadline
 
 ### Pengembangan Lanjutan
-Akan di buat versi native android menggunakan kotlin dan supabase sebagai database
+Akan di buat versi native android menggunakan kotlin dan supabase sebagai database.
+
+### Mengapa saya melakukan pengembangan seperti itu?
+karena saya ingin mempelajari, megenali dan beradaptasi di lingkungan baru android.
 
 ## Teknologi yang digunakan
 1. React JS + Vite
