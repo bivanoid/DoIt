@@ -6,12 +6,15 @@
 3. Sistem level pada todolist
 4. Deadline (Sekedar menampilkan tanggal)
 
-Rencana Update Kedepan - ke react native
+### Rencana Update Kedepan - ke react native (Sedang dipelajari)
 1. Penambahan fitur Kategoti
 2. Sistem Login
 3. Dapat di akses secara offline
 4. Peningkatan akurasi pemilihan kota
 5. Notifikasi Deadline
+
+### Pengembangan Lanjutan
+Akan di buat versi native android menggunakan kotlin dan supabase sebagai database
 
 ## Teknologi yang digunakan
 1. React JS + Vite
