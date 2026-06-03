@@ -28,7 +28,7 @@
   --p-body: 2rem;
 
   --font1: 'degular';
-  --font2: 'work sans';
+  --font2: 'degular';
 }
 
 * {
@@ -38,6 +38,10 @@
   font-family: var(--font2) !important;
   user-select: none;
   outline: none;
+}
+
+input {
+  letter-spacing: 0.2px;
 }
 
 ::-webkit-scrollbar {

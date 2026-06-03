@@ -15,7 +15,7 @@ class MyDB extends Dexie {
 
   constructor() {
         super('myDatabase');
-        this.version(2).stores({ // naikkan versi jika sudah ada data sebelumnya
+        this.version(3).stores({
             todos: '++id, task, level, status, createdAt'
         });
     }

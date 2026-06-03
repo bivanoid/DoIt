@@ -21,7 +21,7 @@
 }
 
 .floating_btn {
-    width: 45px;
+    width: 60px;
     aspect-ratio: 1/1;
     position: relative;
     background: var(--cl4);
@@ -115,7 +115,7 @@
     border: 2px solid var(--dark3);
     color: var(--light1);
     outline: none;
-    font-size: 1;
+    font-size: 1rem;
     font-weight: normal;
     resize: none;
 }

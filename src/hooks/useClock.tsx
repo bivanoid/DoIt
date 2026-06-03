@@ -20,20 +20,6 @@ export function useClock() {
             const month = now.toLocaleString("en-US", { month: "short" }).toUpperCase();
             let periodeHari = "";
 
-            if (h >= 3 && h < 12) {
-                periodeHari = "MORNING :. [3 ~ 12]";
-                
-            } else if (h >= 12 && h < 15) {
-                periodeHari = "AFTERNOON :. [12 ~ 15]";
-               
-            } else if (h >= 15 && h < 18) {
-                periodeHari = "EVENING :. [15 ~ 18]";
-               
-            } else {
-                periodeHari = "NIGHT :. [18 ~ 03]";
-               
-            }
-
             setClock({
                 time: `${h < 10 ? "0" + h : h}.${m < 10 ? "0" + m : m}`,
                 date: `${day} ${month}`,

@@ -8,9 +8,7 @@ const formatCreatedAt = (): string => {
     const now = new Date();
     const day = now.getDate().toString().padStart(2, '0');
     const month = now.toLocaleString("en-US", { month: "short" }).toUpperCase();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    return `${day} ${month} :. ${hours}.${minutes}`;
+    return `${day} ${month}`;
 };
 
 type AddProps = {
@@ -23,7 +21,6 @@ export default function Add({ keFalse }: AddProps) {
 
     const [useDeadline, setUseDeadline] = useState(false);
     const [deadlineDate, setDeadlineDate] = useState("");
-    const [deadlineTime, setDeadlineTime] = useState("");
 
     const todayStr = new Date().toISOString().split("T")[0];
 
@@ -33,11 +30,11 @@ export default function Add({ keFalse }: AddProps) {
         let deadlineISO: string | null = null;
 
         if (useDeadline) {
-            if (!deadlineDate || !deadlineTime) {
-                alert("Pilih tanggal dan jam deadline!");
+            if (!deadlineDate) {
+                alert("Pilih tanggal deadline!");
                 return;
             }
-            deadlineISO = new Date(`${deadlineDate}T${deadlineTime}`).toISOString();
+            deadlineISO = new Date(deadlineDate).toISOString();
         }
 
         await db.todos.add({
@@ -53,7 +50,6 @@ export default function Add({ keFalse }: AddProps) {
 
         setTask("");
         setDeadlineDate("");
-        setDeadlineTime("");
         setUseDeadline(false);
     };
 
@@ -62,14 +58,12 @@ export default function Add({ keFalse }: AddProps) {
             <div className={s.items}>
                 <div className={s.title}>
                     <p>{"Add Task"}</p>
-                    <p onClick={keFalse} className={s.floating_btn}><X/></p>
+                    <p onClick={keFalse} className={s.floating_btn}><X className={s.logo_x}/></p>
                 </div>
                 <div className={s.form}>
                     <div className={s.level_option}>
                         {[1, 2, 3].map((val) => (
-                            
                             <label key={val} className={s.radio}>
-                                {/* <h1>{titleRadio(val)}</h1> */}
                                 <input
                                     type="radio"
                                     value={val}
@@ -90,10 +84,10 @@ export default function Add({ keFalse }: AddProps) {
                         <label htmlFor="">
                             <Check/>
                             <input
-                            type="checkbox"
-                            checked={useDeadline}
-                            onChange={(e) => setUseDeadline(e.target.checked)}
-                            name='checkbox'
+                                type="checkbox"
+                                checked={useDeadline}
+                                onChange={(e) => setUseDeadline(e.target.checked)}
+                                name='checkbox'
                             />
                         </label>
                         <p>Add Deadline?</p>
@@ -106,23 +100,16 @@ export default function Add({ keFalse }: AddProps) {
                                 value={deadlineDate}
                                 min={todayStr}
                                 onClick={(e) => (e.target as HTMLInputElement).showPicker()}
-
                                 onChange={(e) => setDeadlineDate(e.target.value)}
-                            />
-                            <input
-                                type="time"
-                                className={s.deadlineTime}
-                                value={deadlineTime}
-                                onClick={(e) => (e.target as HTMLInputElement).showPicker()}
-                                onChange={(e) => setDeadlineTime(e.target.value)}
                             />
                         </div>
                     )}
 
                     <button 
-                    style={{filter: !task ? "saturate(0%)" : "saturate(100%)"}}
-                    disabled={!task }
-                    onClick={async () => { await addTodo(); keFalse(); }}><h1>Let's Go</h1></button>
+                        style={{filter: !task ? "saturate(0%)" : "saturate(100%)"}}
+                        disabled={!task}
+                        onClick={async () => { await addTodo(); keFalse(); }}
+                    ><h1>Let's Go</h1></button>
                 </div>
             </div>
         </>

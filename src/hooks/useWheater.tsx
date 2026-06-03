@@ -11,18 +11,20 @@ interface WeatherData {
 }
 
 export function useWeather() {
+    const [kota, setKota] = useState<string>("Jakarta");
     const [weather, setWeather] = useState<WeatherData>({
         country: "", city: "", province: "",
         temp_c: 0, temp_f: 0, wind: 0,
         isOffline: false,
     });
 
+    
     useEffect(() => {
         const fetchWeather = async () => {
             try {
                 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
                 const res = await fetch(
-                    `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=Surakarta&aqi=no`
+                    `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${kota}&aqi=no`
                 );
                 const data = await res.json();
                 setWeather({
@@ -39,7 +41,7 @@ export function useWeather() {
             }
         };
         fetchWeather();
-    }, []);
+    }, [kota]);
 
-    return weather;
+    return {...weather, setKota };
 }
