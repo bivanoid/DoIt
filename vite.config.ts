@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/DoIt/',
+  base: '/',
   plugins: [
     react(),
     VitePWA({
@@ -11,23 +11,22 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      scope: '/DoIt/',
-      base: '/DoIt/',
+      scope: '/',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
-        navigateFallback: '/DoIt/index.html',
+        navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/_/, /\/[^/?]+\.[^/]+$/],
       },
       manifest: {
         name: 'Todo App',
         short_name: 'DoIt',
         theme_color: '#ffffff',
-        start_url: '/DoIt/', // ✅ wajib ada
-        scope: '/DoIt/',     // ✅ wajib ada
+        start_url: '/',
+        scope: '/',
         display: 'standalone',
         icons: [
-          { src: '/DoIt/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/DoIt/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
         ],
       },
     }),
