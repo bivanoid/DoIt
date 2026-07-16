@@ -1,82 +1,83 @@
 .todo_item {
-    padding: calc(var(--p-body) / 2);
-    padding-left: 0;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    border-left: 2px solid var(--dark3);
-    color: var(--light1);
-    position: relative;
+	padding: calc(var(--p-body) / 2);
+	padding-left: 0;
+	height: fit-content;
+	display: flex;
+	align-items: center;
+	border-left: 2px solid var(--dark3);
+	color: var(--light1);
+	position: relative;
 }
 
 .todo_item::before {
-    content: '';
-    width: 2rem;
-    height: 2px;
-    background-color: var(--dark3);
+	content: "";
+	width: 2rem;
+	height: 2px;
+	background-color: var(--dark3);
 }
 
 .todo_item:nth-child(2)::after {
-    content: '';
-    width: 4px;
-    height: calc(50% - 2px);
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: translateX(-2px);
-    background-color: var(--dark1);
+	content: "";
+	width: 4px;
+	height: calc(50% - 2px);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	transform: translateX(-2px);
+	background-color: var(--dark1);
 }
 
 .todo_item p:nth-child(1) {
-    font-size: 1rem;
-    font-family: var(--font);
-    margin-bottom: 0.20rem;
-    color: var(--light1);
+	font-size: 1rem;
+	font-family: var(--font);
+	margin-bottom: 0.2rem;
+	color: var(--light1);
 }
 
 .todo_item p:nth-child(2) {
-    color: var(--gray1);
-    font-size: 0.85rem;
+	color: var(--gray1);
+	font-size: 0.85rem;
 }
 
 .todo_header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    font-family: var(--font1);
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 1rem;
+	font-family: var(--font1);
 }
 
 .todo_header button {
-    height: 25px;
-    aspect-ratio: 1/1;
-    border: none;
-    background: var(--dark2);
-    border: 2px solid var(--dark3);
+	height: 25px;
+	aspect-ratio: 1/1;
+	border: none;
+	background: var(--dark2);
+	border: 2px solid var(--dark3);
+	transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .todo_header button:is(:focus, :hover) {
-    background-color: var(--cl4);
+	background-color: var(--cl1);
 }
 
 .todo_header svg {
-    width: 20px;
-    height: 20px;
-    color: var(--dark2);
+	width: 20px;
+	height: 20px;
+	color: var(--dark2);
 }
 
 .con_task {
-    width: 100%;
+	width: 100%;
 }
 
 .deadline {
-    width: fit-content;
-    color: var(--gray1);
-    color: red;
-    margin-top: 0.5rem;
-    font-size: 3rem;
+	width: fit-content;
+	color: var(--gray1);
+	color: red;
+	margin-top: 0.5rem;
+	font-size: 3rem;
 }
 
 .overdue {
-    color: var(--danger);
+	color: var(--danger);
 }

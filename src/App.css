@@ -1,53 +1,54 @@
 @font-face {
-  font-family: 'degular';
-  src: url('./assets/fonts/degular-semibold.woff2') format('woff2');
+	font-family: "degular";
+	src: url("./assets/fonts/degular-semibold.woff2") format("woff2");
 }
 :root {
---dark1: #edf6f9; 
---dark2: #E7F3F6; 
---dark3: #d4dfe3; 
---cl4: #141414;
+	--dark1: #edf6f9;
+	--dark2: #e7f3f6;
+	--dark3: #d4dfe3;
+	--cl4: #141414;
 
-  --gray1: #353535;
-  --cl1: #006D77;
+	--gray1: #353535;
+	--gray2: #353535;
+	--cl1: #006d77;
 
-  --light1: #181818;
+	--light1: #181818;
 
-  --danger: #bc4b51;
-  --warning: #f4a259;
-  --ok: #5b8e7d;
+	--danger: #bc4b51;
+	--warning: #f4a259;
+	--ok: #5b8e7d;
 
-  /* --danger: #ef476f;
+	/* --danger: #ef476f;
   --warning: #ffd166;
   --ok: #06d6a0; */
 
-  --p-body: 2rem;
+	--p-body: 2rem;
 
-  --font1: 'degular';
+	--font1: "degular";
 }
 
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: var(--font1) !important;
-  user-select: none;
-  outline: none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: var(--font1) !important;
+	user-select: none;
+	outline: none;
 }
 
 input {
-  letter-spacing: 0.2px;
+	letter-spacing: 0.2px;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 body {
-  width: 100%;
-  background-color: var(--dark1);
+	width: 100%;
+	background-color: var(--dark1);
 }
