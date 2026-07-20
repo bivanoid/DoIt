@@ -77,11 +77,11 @@ define(['./workbox-7e5eb42b'], (function (workbox) { 'use strict';
    * See https://goo.gl/S9QRab
    */
   workbox.precacheAndRoute([{
-    "url": "/DoIt/index.html",
-    "revision": "0.vphe2h090s8"
+    "url": "/index.html",
+    "revision": "0.j0r7f4ovkrs"
   }], {});
   workbox.cleanupOutdatedCaches();
-  workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("/DoIt/index.html"), {
+  workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("/index.html"), {
     allowlist: [/^\/$/],
     denylist: [/^\/_/, /\/[^/?]+\.[^/]+$/]
   }));

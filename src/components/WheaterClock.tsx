@@ -77,7 +77,7 @@ export default function WeatherClock() {
 					) : (
 						<>
 							<p onClick={() => setGantiKota(true)}>
-								{weather.country} : . {weather.province} : .{" "}
+								{weather.country} - {weather.province} - {" "}
 								{weather.city}
 							</p>
 							<p className={s.suhu}>

@@ -15,7 +15,6 @@ type AddProps = {
 	keFalse: () => any;
 };
 
-// 0 = kategori spesial "Penting" (super important), 1-7 = hari biasa
 const PENTING = 0;
 
 const DAY_LABELS: Record<number, string> = {
@@ -59,6 +58,7 @@ export default function Add({ keFalse }: AddProps) {
 		setTask("");
 		setDeadlineDate("");
 		setUseDeadline(false);
+		keFalse();
 	};
 
 	return (
@@ -66,13 +66,12 @@ export default function Add({ keFalse }: AddProps) {
 			<div className={s.items}>
 				<div className={s.title}>
 					<p>{"Add Task"}</p>
-					<p onClick={keFalse} className={s.floating_btn}>
+					<button onClick={keFalse} className={s.floating_btn}>
 						<X className={s.logo_x} />
-					</p>
+					</button>
 				</div>
 				<div className={s.form}>
 					<div className={s.level_option}>
-						{/* Opsi spesial: Penting, sejajar dengan hari-hari */}
 						<label
 							className={`${s.radio} ${s.radioPenting} ${
 								day === PENTING ? s.radioActive : ""
@@ -87,8 +86,6 @@ export default function Add({ keFalse }: AddProps) {
 							/>
 							<span className={s.custom}>Kustom</span>
 						</label>
-
-						{/* 7 opsi hari biasa */}
 						{[1, 2, 3, 4, 5, 6, 7].map((val) => (
 							<label
 								key={val}

@@ -51,6 +51,7 @@
 	border-radius: 50%;
 	display: grid;
 	place-items: center;
+	border: none;
 }
 
 .items {
