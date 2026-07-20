@@ -11,7 +11,7 @@ interface WeatherData {
 }
 
 export function useWeather() {
-	const [kota, setKota] = useState<string>("Jakarta");
+	const [kota, setKota] = useState<string>("Surakarta");
 	const [weather, setWeather] = useState<WeatherData>({
 		country: "",
 		city: "",

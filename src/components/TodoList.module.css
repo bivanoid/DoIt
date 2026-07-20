@@ -13,6 +13,7 @@
 	flex-direction: column-reverse;
 	position: relative;
 	flex: 0;
+	min-width: 200px;
 }
 
 .today h1 {
@@ -141,5 +142,6 @@
 @media (max-width: 747px) {
 	.group {
 		flex: 0;
+		min-width: auto;
 	}
 }

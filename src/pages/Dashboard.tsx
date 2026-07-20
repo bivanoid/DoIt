@@ -52,9 +52,9 @@ export default function Dashboard() {
 			<div
 				onClick={() => setOpenAdd((prev) => !prev)}
 				style={bgRedup}
-				className={s.title_items}
+				className={s.add_items}
 			>
-				<Plus />
+				<Plus /> Add Task
 			</div>
 		</div>
 	);

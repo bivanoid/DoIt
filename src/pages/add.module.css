@@ -1,14 +1,23 @@
 .title {
 	color: var(--light1);
-	position: sticky;
+	position: relative;
 	top: 0;
+	left: -2rem;
 	background-color: var(--dark1);
 	z-index: 999;
-	padding-top: var(--p-body);
+	height: 60px;
+	width: calc(100% + 4rem);
+	padding-left: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 1rem;
 	/* border-bottom: 2px solid var(--dark2); */
+}
+
+.title p {
+	font-size: 1.5rem;
+	margin-top: 2rem;
 }
 
 .pentingOption {
@@ -48,7 +57,6 @@
 	background: var(--cl4);
 	font-size: 1rem;
 	color: var(--dark1) !important;
-	border-radius: 50%;
 	display: grid;
 	place-items: center;
 	border: none;
@@ -74,17 +82,18 @@
 }
 
 .level_option {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	gap: 1rem;
 	padding: 1rem;
-	width: fit-content;
+	width: 100%;
 	background-color: var(--dark2);
 	border: 2px solid var(--dark3);
 }
 
 .level_option .radio {
-	width: fit-content;
+	width: 100%;
 	padding: 0.5rem 0.75rem;
 	position: relative;
 	display: grid;
@@ -93,6 +102,11 @@
 	place-items: center;
 	background-color: var(--dark2);
 	border: 2px solid var(--dark3);
+}
+
+.level_option .radioPenting {
+	/*border-color: var(--warning);*/
+	color: var(--danger);
 }
 
 .level_option .radio h1 {

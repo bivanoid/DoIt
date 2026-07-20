@@ -13,7 +13,9 @@ export default defineConfig({
       },
       scope: '/',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        globPatterns: [
+          '**/*.{js,css,html,ico,png,svg,webmanifest,woff,woff2,ttf,otf,eot}'
+        ],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/_/, /\/[^/?]+\.[^/]+$/],
       },

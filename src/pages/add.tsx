@@ -18,13 +18,13 @@ type AddProps = {
 const PENTING = 0;
 
 const DAY_LABELS: Record<number, string> = {
-	1: "Senin",
-	2: "Selasa",
-	3: "Rabu",
-	4: "Kamis",
-	5: "Jumat",
-	6: "Sabtu",
-	7: "Minggu",
+	1: "Sen",
+	2: "Sel",
+	3: "Rab",
+	4: "Kam",
+	5: "Jum",
+	6: "Sab",
+	7: "Min",
 };
 
 export default function Add({ keFalse }: AddProps) {
