@@ -13,10 +13,13 @@ const isOverdue = (isoString: string) => new Date(isoString) < new Date();
 const formatDeadline = (isoString: string): string => {
 	const d = new Date(isoString);
 	const dd = d.getDate().toString().padStart(2, "0");
-	const mm = d.toLocaleString("en-US", { month: "long" });
+	const mm = d.toLocaleString("id-ID", { month: "long" });
 	const yy = d.getFullYear().toString().slice(-2);
-	const day = d.toLocaleString("en-US", { weekday: "long" });
-	return `${dd} / ${mm} / ${yy}, ${day}`;
+	const day = d.toLocaleString("id-ID", { weekday: "long" });
+	return (
+			<span><span className={s.day}>[{day}] </span>{dd} / {mm} / {yy} </span>
+			
+	);
 };
 
 export default function TodoItem({ todo, isDeleting, onDelete }: Props) {
@@ -45,7 +48,7 @@ export default function TodoItem({ todo, isDeleting, onDelete }: Props) {
 					<p
 						className={`${s.deadline} ${isOverdue(todo.deadline) ? s.overdue : ""}`}
 						style={{
-							color: isOverdue(todo.deadline) ? "var(--danger)" : "var(--ok)",
+							color: isOverdue(todo.deadline) ? "var(--danger)" : "var(--cl4)",
 						}}
 					>
 						{formatDeadline(todo.deadline)}

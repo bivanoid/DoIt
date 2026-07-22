@@ -26,6 +26,11 @@
 	font-size: 1.5rem;
 }
 
+.dates {
+	position: sticky;
+	top: 0;
+}
+
 .dates span {
 	color: var(--cl1);
 }

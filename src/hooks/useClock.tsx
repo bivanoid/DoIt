@@ -29,7 +29,7 @@ export function useClock() {
 			setClock({
 				time: `${h < 10 ? "0" + h : h}.${m < 10 ? "0" + m : m}`,
 				day: `${namaHari[day]}`,
-				date: `${date}/${month}/${year}`
+				date: `${date} / ${month} / ${year}`
 			});
 		};
 

@@ -65,7 +65,7 @@ export default function Add({ keFalse }: AddProps) {
 		<>
 			<div className={s.items}>
 				<div className={s.title}>
-					<p>{"Add Task"}</p>
+					<p>Tambah Tugas</p>
 					<button onClick={keFalse} className={s.floating_btn}>
 						<X className={s.logo_x} />
 					</button>
@@ -119,7 +119,7 @@ export default function Add({ keFalse }: AddProps) {
 								name="checkbox"
 							/>
 						</label>
-						<p>Add Deadline?</p>
+						<p>Tambahin Deadline?</p>
 					</label>
 					{useDeadline && (
 						<div className={s.deadlineInputs}>
@@ -143,7 +143,7 @@ export default function Add({ keFalse }: AddProps) {
 						}}
 						onKeyDown={(e) => e.key === "Enter" && keFalse()}
 					>
-						<h1>Let's Go</h1>
+						<h1>Tambahkan</h1>
 					</button>
 				</div>
 			</div>

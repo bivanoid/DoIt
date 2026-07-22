@@ -54,7 +54,7 @@ export default function Dashboard() {
 				style={bgRedup}
 				className={s.add_items}
 			>
-				<Plus /> Add Task
+				<Plus /> Tambah Tugas
 			</div>
 		</div>
 	);

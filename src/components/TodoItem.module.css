@@ -9,6 +9,8 @@
 	position: relative;
 }
 
+
+
 .todo_item::before {
 	content: "";
 	width: 2rem;
@@ -72,10 +74,13 @@
 
 .deadline {
 	width: fit-content;
-	color: var(--gray1);
-	color: red;
+	color: var(--cl4);
 	margin-top: 0.5rem;
 	font-size: 3rem;
+}
+
+.day {
+	color: var(--cl1);
 }
 
 .overdue {

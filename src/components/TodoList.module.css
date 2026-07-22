@@ -13,7 +13,7 @@
 	flex-direction: column-reverse;
 	position: relative;
 	flex: 0;
-	min-width: 200px;
+	min-width: 300px;
 }
 
 .today h1 {
@@ -27,6 +27,8 @@
 	gap: 0.5rem;
 	height: fit-content;
 	order: 1;
+	position: sticky;
+	top: 0;
 }
 
 :is(.title_level, .count_level) {
@@ -49,6 +51,7 @@
 .title_level {
 	gap: 0.5rem;
 	display: flex;
+	flex: 1;
 }
 
 .title_level .today_indicator {
@@ -143,5 +146,11 @@
 	.group {
 		flex: 0;
 		min-width: auto;
+		width: 100%;
+	}
+
+	.title_level {
+		width: fit-content;
+		flex: 0;
 	}
 }

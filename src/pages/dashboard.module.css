@@ -11,12 +11,11 @@
 	overflow: hidden !important;
 	background-color: var(--dark1);
 	padding-inline: var(--p-body);
-	display: grid;
+	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	margin-top: 0rem;
+	margin-bottom: 60px;
 	flex: 1;
-	grid-template-columns: 1fr 1fr 1fr;
 	align-items: flex-start;
 	padding-bottom: 50px;
 	padding-inline: clamp(10vw, 10vw, 45vw);
