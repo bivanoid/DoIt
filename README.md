@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# DoIt
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple To Do List Website — aplikasi daftar tugas sederhana untuk membuat, mengedit, menandai selesai, dan menghapus tugas.
 
-Currently, two official plugins are available:
+## Deskripsi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+DoIt adalah aplikasi web kecil untuk mengelola tugas harian. Dirancang agar ringan dan mudah dikembangkan, proyek ini berisi kode utama berbasis JavaScript dengan sebagian komponen atau utilitas dalam TypeScript, serta styling menggunakan CSS. Cocok sebagai contoh proyek pemula atau bahan latihan React/Vite.
 
-## React Compiler
+## Fitur
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Tambah tugas baru
+- Tandai tugas sebagai selesai/belum selesai
+- Edit tugas
+- Hapus tugas
+- Penyimpanan sederhana (lokal) — bila diimplementasikan
 
-## Expanding the ESLint configuration
+## Teknologi
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- JavaScript (utama)
+- TypeScript (beberapa file/utilitas)
+- HTML, CSS
+- Vite (dev server dan build) — jika proyek dibuat dari template Vite
+- React (jika digunakan dalam kode sumber)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+> Catatan: Sesuaikan bagian "Teknologi" jika Anda mengganti stack (mis. plain JS tanpa React). Saya menuliskan teknologi sesuai komposisi bahasa repo (JavaScript + TypeScript) dan README template awal.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Instalasi
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Clone repo
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   git clone https://github.com/bivanoid/DoIt.git
+   cd DoIt
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Install dependensi
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   npm install
+   
+   atau jika menggunakan yarn:
+
+   yarn
+
+## Menjalankan dalam mode pengembangan
+
+Jalankan dev server:
+
+npm run dev
+
+Buka http://localhost:5173 (atau port lain yang ditampilkan) untuk melihat aplikasi.
+
+## Build untuk produksi
+
+Untuk membuat berkas produksi:
+
+npm run build
+
+Untuk melihat hasil build secara lokal (preview):
+
+npm run preview
+
+## Struktur proyek (contoh)
+
+- src/ — kode sumber aplikasi
+  - components/ — komponen UI
+  - pages/ atau views/ — halaman/halaman utama
+  - styles/ — file CSS
+  - main.js / main.tsx — entrypoint
+- public/ — aset statis (ikon, favicon)
+- index.html
+
+Sesuaikan struktur di atas dengan struktur aktual repositori jika berbeda.
+
+## Cara penggunaan
+
+- Ketik nama tugas baru pada input, lalu tekan Enter atau klik tombol "Tambah" untuk menyimpan tugas.
+- Klik checkbox atau tombol untuk menandai tugas selesai / belum selesai.
+- Klik ikon edit untuk mengubah teks tugas.
+- Klik ikon hapus untuk menghapus tugas.
+
+## Kontribusi
+
+Kontribusi diterima! Buat issue atau pull request untuk menambah fitur, memperbaiki bug, atau meningkatkan dokumentasi.
+
+Panduan singkat:
+
+1. Fork repo
+2. Buat branch fitur: `git checkout -b feat/nama-fitur`
+3. Commit perubahan: `git commit -m "Menambahkan fitur ..."`
+4. Push ke fork Anda dan buat Pull Request
+
+## Lisensi
+
+Lisensi belum ditentukan dalam repo. Jika Anda ingin menambahkan lisensi, misalnya MIT, tambahkan file `LICENSE` dengan konten lisensi yang sesuai.
+
+---
+
+Jika Anda ingin, saya bisa menyesuaikan README ini lebih spesifik berdasarkan struktur file dan dependensi aktual dalam repo (mis. package.json, apakah pakai React, library penyimpanan, dsb.). Beri tahu saya kalau ingin versi yang lebih detail dan saya akan menyesuaikannya.
