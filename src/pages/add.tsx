@@ -4,6 +4,8 @@ import { Check, X, Plus, Trash2 } from "lucide-react";
 import { db, type Category } from "../data/db";
 import { scheduleNotification } from "../utils/notif";
 
+//tes
+
 const formatCreatedAt = (): string => {
 	const now = new Date();
 	const day = now.getDate().toString().padStart(2, "0");
