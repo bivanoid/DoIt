@@ -1,25 +1,24 @@
 # DoIt
 
-A simple To Do List Website aplikasi daftar tugas sederhana untuk membuat, mengedit, menandai selesai, dan menghapus tugas.
+A simple task list application
 
 <img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/e2ec0700-f735-43c9-b19d-7d3c75f4e2e0" />
 
-## Deskripsi
+## Description
 
-DoIt adalah aplikasi web kecil untuk mengelola tugas harian. Dirancang agar ringan dan mudah dikembangkan, proyek ini berisi kode utama berbasis JavaScript dengan sebagian komponen atau utilitas dalam TypeScript, serta styling menggunakan CSS. Cocok sebagai contoh proyek pemula atau bahan latihan React/Vite.
+DoIt is a small web application for managing daily tasks. Designed to be lightweight and easy to develop, this project consists of JavaScript-based core code with some components or utilities in TypeScript, as well as styling using CSS. It’s suitable as a beginner project example or React/Vite practice material.
 
-## Fitur
+## Features
 
-- Tambah tugas baru
-- Tandai tugas sebagai selesai/belum selesai
-- Edit tugas
-- Hapus tugas
-- Penyimpanan sederhana (lokal) — bila diimplementasikan
+- Add a new task
+- Mark a task as completed or incomplete
+- Edit a task
+- Delete a task
+- local storage
 
-## Teknologi
+## Technologies
 
-- TypeScript 
+- TypeScript
 - HTML, CSS
-- Vite (dev server dan build) — jika proyek dibuat dari template Vite
-- React (jika digunakan dalam kode sumber)
-
+- Vite (dev server and build) — if the project is created from a Vite template
+- React (if used in the source code)
