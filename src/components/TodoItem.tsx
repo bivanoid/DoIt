@@ -9,17 +9,20 @@ interface Props {
 }
 
 const isOverdue = (isoString: string) => new Date(isoString) < new Date();
-const formatDeadline = (isoString: string): string => {
+const formatDeadline = (isoString: string) => {
 	const d = new Date(isoString);
 	const dd = d.getDate().toString().padStart(2, "0");
 	const mm = d.toLocaleString("id-ID", { month: "long" });
 	const yy = d.getFullYear().toString().slice(-2);
 	const day = d.toLocaleString("id-ID", { weekday: "long" });
+
 	return (
-		<span><span className={s.day}>[{day}] </span>{dd} / {mm} / {yy} </span>
+		<span>
+			<span className={s.day}>[{day}] </span>
+			{dd} / {mm} / {yy}
+		</span>
 	);
 };
-
 export default function TodoItem({ todo, isDeleting, onDelete }: Props) {
 	return (
 		<li
