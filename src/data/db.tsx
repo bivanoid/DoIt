@@ -4,7 +4,7 @@ import type { Table } from "dexie";
 export interface Todo {
 	id?: number;
 	task: string;
-	category: string; // Category name (e.g., "Tugas", "Aktifitas", "Liburan", or custom)
+	category: string;
 	status: boolean;
 	createdAt: string;
 	deadline?: string | null;
@@ -13,8 +13,8 @@ export interface Todo {
 export interface Category {
 	id?: number;
 	name: string;
-	isDefault: boolean; // true for built-in categories
-	color?: string; // Optional: for future color coding
+	isDefault: boolean;
+	color?: string;
 }
 
 class MyDB extends Dexie {

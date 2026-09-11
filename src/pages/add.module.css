@@ -57,7 +57,6 @@
 	color: var(--light1);
 }
 
-/* Category Section Styles */
 .categorySection {
 	display: flex;
 	flex-direction: column;
@@ -134,7 +133,6 @@
 	filter: brightness(0.9);
 }
 
-/* Add Category Styles */
 .addCategoryBtn {
 	display: flex;
 	align-items: center;
@@ -276,7 +274,6 @@
 	margin: 0;
 }
 
-/* Deadline Toggle Styles */
 .deadlineToggle {
 	color: var(--light1);
 	display: flex;
@@ -335,7 +332,6 @@
 	margin: 0;
 }
 
-/* Deadline Input Styles */
 .deadlineInputs {
 	display: flex;
 	gap: 0.5rem;
@@ -364,7 +360,6 @@
 	cursor: pointer;
 }
 
-/* Responsive Design */
 @media (max-width: 747px) {
 	.categoryBtn {
 		padding: 0.4rem 0.8rem;

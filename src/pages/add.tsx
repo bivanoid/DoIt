@@ -4,7 +4,7 @@ import { Check, X, Plus, Trash2 } from "lucide-react";
 import { db, type Category } from "../data/db";
 import { scheduleNotification } from "../utils/notif";
 
-//tes
+//test trigger commit yfyfyttyu
 
 const formatCreatedAt = (): string => {
 	const now = new Date();
@@ -27,7 +27,6 @@ export default function Add({ keFalse }: AddProps) {
 	const [showAddCategory, setShowAddCategory] = useState(false);
 	const todayStr = new Date().toISOString().split("T")[0];
 
-	// Load categories from database
 	useEffect(() => {
 		const loadCategories = async () => {
 			const cats = await db.categories.toArray();
@@ -75,9 +74,8 @@ export default function Add({ keFalse }: AddProps) {
 		const trimmedName = newCategoryName.trim();
 		if (!trimmedName) return;
 
-		// Check if category already exists
 		const exists = categories.some(
-			(cat) => cat.name.toLowerCase() === trimmedName.toLowerCase()
+			(cat) => cat.name.toLowerCase() === trimmedName.toLowerCase(),
 		);
 		if (exists) {
 			alert("Kategori sudah ada!");
@@ -96,10 +94,12 @@ export default function Add({ keFalse }: AddProps) {
 		setShowAddCategory(false);
 	};
 
-	const handleDeleteCategory = async (categoryId: number | undefined, categoryName: string) => {
+	const handleDeleteCategory = async (
+		categoryId: number | undefined,
+		categoryName: string,
+	) => {
 		if (!categoryId) return;
 
-		// Prevent deletion of default categories
 		const category = categories.find((c) => c.name === categoryName);
 		if (category?.isDefault) {
 			alert("Tidak bisa menghapus kategori bawaan!");
@@ -107,7 +107,7 @@ export default function Add({ keFalse }: AddProps) {
 		}
 
 		const confirmDelete = window.confirm(
-			`Hapus kategori "${categoryName}"? Tugas dengan kategori ini tidak akan terhapus.`
+			`Hapus kategori "${categoryName}"? Tugas dengan kategori ini tidak akan terhapus.`,
 		);
 		if (!confirmDelete) return;
 
@@ -115,7 +115,6 @@ export default function Add({ keFalse }: AddProps) {
 		const updatedCategories = await db.categories.toArray();
 		setCategories(updatedCategories);
 
-		// Switch to first available category if the selected one was deleted
 		if (selectedCategory === categoryName && updatedCategories.length > 0) {
 			setSelectedCategory(updatedCategories[0].name);
 		}
@@ -131,7 +130,6 @@ export default function Add({ keFalse }: AddProps) {
 					</button>
 				</div>
 				<div className={s.form}>
-					{/* Category Selection */}
 					<div className={s.categorySection}>
 						<div className={s.categoryGrid}>
 							{categories.map((category) => (
@@ -150,7 +148,10 @@ export default function Add({ keFalse }: AddProps) {
 										<button
 											className={s.deleteBtn}
 											onClick={() =>
-												handleDeleteCategory(category.id, category.name)
+												handleDeleteCategory(
+													category.id,
+													category.name,
+												)
 											}
 											title="Hapus kategori"
 										>
@@ -159,7 +160,6 @@ export default function Add({ keFalse }: AddProps) {
 									)}
 								</div>
 							))}
-							{/* Add Category Button */}
 							{!showAddCategory && (
 								<button
 									className={s.addCategoryBtn}
@@ -170,10 +170,6 @@ export default function Add({ keFalse }: AddProps) {
 								</button>
 							)}
 						</div>
-
-						
-
-						{/* Add Category Input */}
 						{showAddCategory && (
 							<div className={s.addCategoryForm}>
 								<input
@@ -213,7 +209,6 @@ export default function Add({ keFalse }: AddProps) {
 						)}
 					</div>
 
-					{/* Task Input */}
 					<textarea
 						className={s.inputDesc}
 						value={task}
@@ -221,7 +216,6 @@ export default function Add({ keFalse }: AddProps) {
 						placeholder="Masukkan tugas..."
 					/>
 
-					{/* Deadline Toggle */}
 					<label className={s.deadlineToggle}>
 						<label htmlFor="deadline-check">
 							<Check />
@@ -236,7 +230,6 @@ export default function Add({ keFalse }: AddProps) {
 						<p>Tambahin Deadline?</p>
 					</label>
 
-					{/* Deadline Date Input */}
 					{useDeadline && (
 						<div className={s.deadlineInputs}>
 							<input
@@ -252,10 +245,12 @@ export default function Add({ keFalse }: AddProps) {
 						</div>
 					)}
 
-					{/* Submit Button */}
 					<button
 						style={{
-							filter: !task || !selectedCategory ? "saturate(0%)" : "saturate(100%)",
+							filter:
+								!task || !selectedCategory
+									? "saturate(0%)"
+									: "saturate(100%)",
 						}}
 						disabled={!task || !selectedCategory}
 						onClick={async () => {
