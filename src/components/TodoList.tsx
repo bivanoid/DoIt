@@ -1,5 +1,7 @@
 import { CalendarCheckIcon } from "lucide-react";
-import type { Todo } from "../data/db";
+import { useState, useEffect } from "react";
+import type { Todo, Category } from "../data/db";
+import { db } from "../data/db";
 import TodoItem from "./TodoItem";
 import s from "./TodoList.module.css";
 
@@ -9,27 +11,23 @@ interface Props {
 	onDelete: (id: number) => void;
 }
 
-const PENTING = 0;
-const DAYS = [1, 2, 3, 4, 5, 6, 7] as const;
-
-const DAY_LABELS: Record<number, string> = {
-	1: "Senin",
-	2: "Selasa",
-	3: "Rabu",
-	4: "Kamis",
-	5: "Jumat",
-	6: "Sabtu",
-	7: "Minggu",
-};
-
-const labelForDays = (day: number) => DAY_LABELS[day] ?? "Unknown";
-
-const getTodayInSystem = () => {
-	const jsDay = new Date().getDay();
-	return jsDay === 0 ? 7 : jsDay;
-};
-
 export default function TodoList({ todos, deletingId, onDelete }: Props) {
+	const [categories, setCategories] = useState<Category[]>([]);
+	const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+	useEffect(() => {
+		const loadCategories = async () => {
+			try {
+				const cats = await db.categories.toArray();
+				setCategories(cats);
+			} catch (error) {
+				console.error("Error loading categories:", error);
+			} finally {
+				setIsLoadingCategories(false);
+			}
+		};
+		loadCategories();
+	}, [todos]);
+
 	if (!todos || todos.length === 0) {
 		return (
 			<div className={s.empty_state}>
@@ -42,66 +40,56 @@ export default function TodoList({ todos, deletingId, onDelete }: Props) {
 		);
 	}
 
-	const penting = todos.filter((t) => t.day === PENTING);
+	if (isLoadingCategories) {
+		return (
+			<div className={s.empty_state}>
+				<h3>Memuat kategori...</h3>
+			</div>
+		);
+	}
 
-	const grouped = DAYS.reduce(
-		(acc, day) => {
-			const filtered = todos.filter((t) => t.day === day);
-			if (filtered.length > 0) acc[day] = filtered;
+	const grouped = categories.reduce(
+		(acc, category) => {
+			const filtered = todos.filter((t) => t.category === category.name);
+			if (filtered.length > 0) {
+				acc[category.name] = {
+					todos: filtered,
+					isDefault: category.isDefault,
+				};
+			}
 			return acc;
 		},
-		{} as Record<number, Todo[]>,
+		{} as Record<string, { todos: Todo[]; isDefault: boolean }>,
 	);
 
-	const today = getTodayInSystem();
+	const categoryNames = categories
+		.filter((cat) => grouped[cat.name])
+		.map((cat) => cat.name);
 
 	return (
 		<>
-			{/* Kategori spesial, selalu di atas */}
-			{penting.length > 0 && (
-				<div className={s.group}>
-					<div className={`${s.header_item} ${s.penting}`}>
-						<h1 className={s.title_level}>
-							
-							Kustom
-						</h1>
-						<h1 className={s.count_level}>{penting.length}</h1>
-					</div>
-					{penting.map((todo) => (
-						<TodoItem
-							key={todo.id}
-							todo={todo}
-							isDeleting={deletingId === todo.id}
-							onDelete={onDelete}
-						/>
-					))}
-				</div>
-			)}
-
-			{/* 7 hari biasa */}
-			{DAYS.map((day) => {
-				const items = grouped[day];
-				if (!items) return null;
-
-				const isToday = day === today;
+			{categoryNames.map((categoryName) => {
+				const { todos: items, isDefault } = grouped[categoryName];
 
 				return (
-					<div key={day} className={s.group}>
-						<div className={`${s.header_item} ${isToday ? s.today : ""}`}>
-							<h1 className={s.title_level}>
-								{isToday? (<span className={s.today_indicator}></span>) : "" }
-								{labelForDays(day)}
-							</h1>
+					<div key={categoryName} className={s.group}>
+						<div
+							className={`${s.header_item} ${isDefault ? s.default_category : s.custom_category}`}
+						>
+							<div className={`${s.title_level}`}>
+								<span className={s.category_name}>{categoryName}</span>
+							</div>
 							<h1 className={s.count_level}>{items.length}</h1>
 						</div>
-						{items.map((todo) => (
-							<TodoItem
-								key={todo.id}
-								todo={todo}
-								isDeleting={deletingId === todo.id}
-								onDelete={onDelete}
-							/>
-						))}
+						<div className={s.items_wrapper}>
+							{items.map((todo) => (
+								<TodoItem
+									todo={todo}
+									isDeleting={deletingId === todo.id}
+									onDelete={onDelete}
+								/>
+							))}
+						</div>
 					</div>
 				);
 			})}

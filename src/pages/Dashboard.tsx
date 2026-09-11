@@ -35,7 +35,7 @@ export default function Dashboard() {
 
 	return (
 		<div className={s.container}>
-			<div style={bgRedup}>
+			<div className={s.con_weather} style={bgRedup}>
 				<WeatherClock />
 			</div>
 

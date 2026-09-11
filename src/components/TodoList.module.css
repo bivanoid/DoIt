@@ -1,8 +1,7 @@
 .items {
 	padding-top: 1rem;
 	height: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+
 	align-items: flex-start;
 	background: var(--dark1);
 	gap: 1rem;
@@ -15,9 +14,7 @@
 	flex: 0;
 	min-width: 300px;
 }
-
 .today h1 {
-	/*background-color: var(--cl1);*/
 	border: 2px solid var(--dark3);
 	color: var(--cl1);
 }
@@ -29,13 +26,25 @@
 	order: 1;
 	position: sticky;
 	top: 0;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	user-select: none;
+	padding-left: 0;
+}
+
+.header_item:hover .title_level {
+	background-color: var(--dark3);
+}
+
+.header_item:hover .count_level {
+	background-color: var(--dark3);
 }
 
 :is(.title_level, .count_level) {
 	padding: 0.5rem 1rem;
 	color: var(--gray1);
-	font-size: 1rem;
-	text-transform: uppercase;
+	font-size: 1.25rem;
+	text-transform: capitalize;
 	width: auto;
 	min-width: fit-content;
 	align-self: flex-start;
@@ -44,14 +53,23 @@
 	align-self: stretch;
 	display: flex;
 	place-items: center;
-	margin-bottom: 10px;
 	position: relative;
+	transition: background-color 0.2s ease;
 }
 
 .title_level {
 	gap: 0.5rem;
 	display: flex;
 	flex: 1;
+}
+
+.chevron {
+	transition: transform 0.3s ease;
+	flex-shrink: 0;
+}
+
+.chevron.open {
+	transform: rotate(180deg);
 }
 
 .title_level .today_indicator {
@@ -68,10 +86,12 @@
 	0% {
 		scale: 1;
 		opacity: 1;
-	} 50% {
+	}
+	50% {
 		scale: 0.75;
 		opacity: 0.25;
-	} 100% {
+	}
+	100% {
 		scale: 1;
 		opacity: 1;
 	}
@@ -98,12 +118,17 @@
 .title_level::before {
 	content: "";
 	width: 2px;
-	height: 50%;
+	height: 0%;
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	background-color: var(--dark3);
 	transform: translateY(100%) translateX(-2px);
+}
+
+.title_level.expanded::before {
+	transition: 0.15s;
+	height: 50%;
 }
 
 .count_level::before {
@@ -113,6 +138,23 @@
 	left: calc(-0.5rem + -2px);
 	height: 2px;
 	background-color: var(--dark3);
+}
+.items_wrapper {
+	display: flex;
+	flex-direction: column;
+	animation: slideDown 0.3s ease;
+	margin-bottom: 0.5rem;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .empty_state {
@@ -130,7 +172,7 @@
 }
 
 .empty_state h3 {
-	text-transform: uppercase;
+	text-transform: capitalize;
 }
 
 .empty_state p {

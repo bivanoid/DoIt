@@ -2,32 +2,27 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
 	position: sticky;
+	flex: 1;
 	top: 0;
 	gap: 1rem;
 	background-color: var(--dark1);
-	padding-block: calc(var(--p-body) * 2);
-	padding-bottom: 1rem;
-	padding-inline: clamp(10vw, 10vw, 45vw);
-	@media (min-width: 1024px) {
-		padding-inline: clamp(20vw, 10vw, 45vw);
-	}
+	padding: var(--p-body);
+	padding-bottom: 0;
+	position: sticky;
+	top: 0;
 }
 
 .title h1:nth-child(1) {
 	color: var(--cl4);
-	font-size: clamp(4.5rem, 10vw, 5.5rem);
+	/*font-size: clamp(4.5rem, 10vw, 5.5rem);*/
+	font-size: 2rem;
 	font-family: var(--font1);
-}
-
-.wheater p:nth-child(2) {
-	font-family: var(--font1) !important;
-	font-size: 1.5rem;
 }
 
 .dates {
 	position: sticky;
+	font-size: 1rem;
 	top: 0;
 }
 
@@ -52,6 +47,7 @@
 	gap: 0.5rem;
 	width: fit-content;
 	margin-top: 0.25rem;
+	font-size: 1.5rem;
 }
 
 .temperature {
@@ -120,11 +116,7 @@
 @media (max-width: 767px) {
 	.con_title {
 		flex-direction: column;
-		padding-bottom: calc(var(--p-body) * 2);
-	}
-
-	.title {
-		text-align: center;
+		padding-top: calc(var(--p-body));
 	}
 
 	.wheater {

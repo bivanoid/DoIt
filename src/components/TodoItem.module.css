@@ -18,7 +18,7 @@
 	background-color: var(--dark3);
 }
 
-.todo_item:nth-child(2)::after {
+.todo_item:last-child::after {
 	content: "";
 	width: 4px;
 	height: calc(50% - 2px);

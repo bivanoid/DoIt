@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useClock } from "../hooks/useClock";
 import s from "./WeatherClock.module.css";
-import { useWeather } from "../hooks/useWheater";
+import { useWeather } from "../hooks/useWeather";
 import {
 	Check,
 	RefreshCw,
@@ -71,7 +71,7 @@ export default function WeatherClock() {
 				</p>
 			</div>
 			{!menggantiKota && (
-				<div className={s.wheater}>
+				<div className={s.weather}>
 					{weather.isOffline ? (
 						<p>Sedang Offline</p>
 					) : (
@@ -109,10 +109,10 @@ export default function WeatherClock() {
 						autoFocus
 					/>
 					<button onClick={handleGantiKota}>
-						<Check />
+						<Check size={26} />
 					</button>
 					<button onClick={() => setGantiKota(false)}>
-						<X />
+						<X size={26}/>
 					</button>
 				</div>
 			)}

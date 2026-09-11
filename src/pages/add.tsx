@@ -1,7 +1,7 @@
 import s from "./add.module.css";
-import { useState } from "react";
-import { Check, X } from "lucide-react";
-import { db } from "../data/db";
+import { useState, useEffect } from "react";
+import { Check, X, Plus, Trash2 } from "lucide-react";
+import { db, type Category } from "../data/db";
 import { scheduleNotification } from "../utils/notif";
 
 const formatCreatedAt = (): string => {
@@ -12,30 +12,34 @@ const formatCreatedAt = (): string => {
 };
 
 type AddProps = {
-	keFalse: () => any;
-};
-
-const PENTING = 0;
-
-const DAY_LABELS: Record<number, string> = {
-	1: "Sen",
-	2: "Sel",
-	3: "Rab",
-	4: "Kam",
-	5: "Jum",
-	6: "Sab",
-	7: "Min",
+	keFalse: () => void;
 };
 
 export default function Add({ keFalse }: AddProps) {
 	const [task, setTask] = useState("");
-	const [day, setDay] = useState<number>(3);
+	const [selectedCategory, setSelectedCategory] = useState<string>("Tugas");
 	const [useDeadline, setUseDeadline] = useState(false);
 	const [deadlineDate, setDeadlineDate] = useState("");
+	const [categories, setCategories] = useState<Category[]>([]);
+	const [newCategoryName, setNewCategoryName] = useState("");
+	const [showAddCategory, setShowAddCategory] = useState(false);
 	const todayStr = new Date().toISOString().split("T")[0];
 
+	// Load categories from database
+	useEffect(() => {
+		const loadCategories = async () => {
+			const cats = await db.categories.toArray();
+			setCategories(cats);
+			if (cats.length > 0) {
+				setSelectedCategory(cats[0].name);
+			}
+		};
+		loadCategories();
+	}, []);
+
 	const addTodo = async () => {
-		if (!task) return;
+		if (!task || !selectedCategory) return;
+
 		let deadlineISO: string | null = null;
 		if (useDeadline) {
 			if (!deadlineDate) {
@@ -44,21 +48,75 @@ export default function Add({ keFalse }: AddProps) {
 			}
 			deadlineISO = new Date(deadlineDate).toISOString();
 		}
+
 		await db.todos.add({
 			task,
-			day,
-			isPenting: day === PENTING,
+			category: selectedCategory,
 			status: false,
 			createdAt: formatCreatedAt(),
 			deadline: deadlineISO,
 		});
+
 		if (deadlineISO) {
 			await scheduleNotification(task, deadlineISO);
 		}
+
 		setTask("");
 		setDeadlineDate("");
 		setUseDeadline(false);
+		setNewCategoryName("");
+		setShowAddCategory(false);
 		keFalse();
+	};
+
+	const handleAddCategory = async () => {
+		const trimmedName = newCategoryName.trim();
+		if (!trimmedName) return;
+
+		// Check if category already exists
+		const exists = categories.some(
+			(cat) => cat.name.toLowerCase() === trimmedName.toLowerCase()
+		);
+		if (exists) {
+			alert("Kategori sudah ada!");
+			return;
+		}
+
+		await db.categories.add({
+			name: trimmedName,
+			isDefault: false,
+		});
+
+		const updatedCategories = await db.categories.toArray();
+		setCategories(updatedCategories);
+		setSelectedCategory(trimmedName);
+		setNewCategoryName("");
+		setShowAddCategory(false);
+	};
+
+	const handleDeleteCategory = async (categoryId: number | undefined, categoryName: string) => {
+		if (!categoryId) return;
+
+		// Prevent deletion of default categories
+		const category = categories.find((c) => c.name === categoryName);
+		if (category?.isDefault) {
+			alert("Tidak bisa menghapus kategori bawaan!");
+			return;
+		}
+
+		const confirmDelete = window.confirm(
+			`Hapus kategori "${categoryName}"? Tugas dengan kategori ini tidak akan terhapus.`
+		);
+		if (!confirmDelete) return;
+
+		await db.categories.delete(categoryId);
+		const updatedCategories = await db.categories.toArray();
+		setCategories(updatedCategories);
+
+		// Switch to first available category if the selected one was deleted
+		if (selectedCategory === categoryName && updatedCategories.length > 0) {
+			setSelectedCategory(updatedCategories[0].name);
+		}
 	};
 
 	return (
@@ -71,48 +129,102 @@ export default function Add({ keFalse }: AddProps) {
 					</button>
 				</div>
 				<div className={s.form}>
-					<div className={s.level_option}>
-						<label
-							className={`${s.radio} ${s.radioPenting} ${
-								day === PENTING ? s.radioActive : ""
-							}`}
-						>
-							<input
-								type="radio"
-								name="day"
-								value={PENTING}
-								checked={day === PENTING}
-								onChange={() => setDay(PENTING)}
-							/>
-							<span className={s.custom}>Kustom</span>
-						</label>
-						{[1, 2, 3, 4, 5, 6, 7].map((val) => (
-							<label
-								key={val}
-								className={`${s.radio} ${day === val ? s.radioActive : ""}`}
-							>
+					{/* Category Selection */}
+					<div className={s.categorySection}>
+						<div className={s.categoryGrid}>
+							{categories.map((category) => (
+								<div key={category.id} className={s.categoryItem}>
+									<button
+										className={`${s.categoryBtn} ${
+											selectedCategory === category.name
+												? s.categoryBtnActive
+												: ""
+										}`}
+										onClick={() => setSelectedCategory(category.name)}
+									>
+										{category.name}
+									</button>
+									{!category.isDefault && (
+										<button
+											className={s.deleteBtn}
+											onClick={() =>
+												handleDeleteCategory(category.id, category.name)
+											}
+											title="Hapus kategori"
+										>
+											<Trash2 size={14} />
+										</button>
+									)}
+								</div>
+							))}
+							{/* Add Category Button */}
+							{!showAddCategory && (
+								<button
+									className={s.addCategoryBtn}
+									onClick={() => setShowAddCategory(true)}
+								>
+									<Plus size={16} />
+									<span>Tambah Kategori</span>
+								</button>
+							)}
+						</div>
+
+						
+
+						{/* Add Category Input */}
+						{showAddCategory && (
+							<div className={s.addCategoryForm}>
 								<input
-									type="radio"
-									name="day"
-									value={val}
-									checked={day === val}
-									onChange={(e) => setDay(Number(e.target.value))}
+									type="text"
+									className={s.categoryInput}
+									placeholder="Nama kategori baru..."
+									value={newCategoryName}
+									onChange={(e) => setNewCategoryName(e.target.value)}
+									onKeyDown={(e) => {
+										if (e.key === "Enter") {
+											handleAddCategory();
+										}
+										if (e.key === "Escape") {
+											setShowAddCategory(false);
+											setNewCategoryName("");
+										}
+									}}
+									autoFocus
 								/>
-								<span className={s.custom}>{DAY_LABELS[val]}</span>
-							</label>
-						))}
+								<button
+									className={s.confirmAddBtn}
+									onClick={handleAddCategory}
+									disabled={!newCategoryName.trim()}
+								>
+									<Check size={26} />
+								</button>
+								<button
+									className={s.cancelAddBtn}
+									onClick={() => {
+										setShowAddCategory(false);
+										setNewCategoryName("");
+									}}
+								>
+									<X size={26} />
+								</button>
+							</div>
+						)}
 					</div>
 
+					{/* Task Input */}
 					<textarea
 						className={s.inputDesc}
 						value={task}
 						onChange={(e) => setTask(e.target.value)}
 						placeholder="Masukkan tugas..."
 					/>
+
+					{/* Deadline Toggle */}
 					<label className={s.deadlineToggle}>
-						<label htmlFor="">
+						<label htmlFor="deadline-check">
 							<Check />
 							<input
+								id="deadline-check"
 								type="checkbox"
 								checked={useDeadline}
 								onChange={(e) => setUseDeadline(e.target.checked)}
@@ -121,6 +233,8 @@ export default function Add({ keFalse }: AddProps) {
 						</label>
 						<p>Tambahin Deadline?</p>
 					</label>
+
+					{/* Deadline Date Input */}
 					{useDeadline && (
 						<div className={s.deadlineInputs}>
 							<input
@@ -135,13 +249,16 @@ export default function Add({ keFalse }: AddProps) {
 							/>
 						</div>
 					)}
+
+					{/* Submit Button */}
 					<button
-						style={{ filter: !task ? "saturate(0%)" : "saturate(100%)" }}
-						disabled={!task}
+						style={{
+							filter: !task || !selectedCategory ? "saturate(0%)" : "saturate(100%)",
+						}}
+						disabled={!task || !selectedCategory}
 						onClick={async () => {
 							await addTodo();
 						}}
-						onKeyDown={(e) => e.key === "Enter" && keFalse()}
 					>
 						<h1>Tambahkan</h1>
 					</button>
