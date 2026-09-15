@@ -1,6 +1,6 @@
 import s from "./add.module.css";
 import { useState, useEffect } from "react";
-import { Check, X, Plus, Trash2 } from "lucide-react";
+import { Check, X, Plus, LayoutDashboard } from "lucide-react";
 import { db, type Category } from "../data/db";
 import { scheduleNotification } from "../utils/notif";
 
@@ -122,7 +122,17 @@ export default function Add({ keFalse }: AddProps) {
 
 	return (
 		<>
-			<div className={s.items}>
+			<div
+				className={s.items}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+					 addTodo()
+					}
+					if (e.key === "Escape") {
+						keFalse();
+					}
+				}}
+			>
 				<div className={s.title}>
 					<p>Tambah Tugas</p>
 					<button onClick={keFalse} className={s.floating_btn}>
@@ -155,7 +165,7 @@ export default function Add({ keFalse }: AddProps) {
 											}
 											title="Hapus kategori"
 										>
-											<Trash2 size={14} />
+											<X size={14} />
 										</button>
 									)}
 								</div>
@@ -165,7 +175,7 @@ export default function Add({ keFalse }: AddProps) {
 									className={s.addCategoryBtn}
 									onClick={() => setShowAddCategory(true)}
 								>
-									<Plus size={16} />
+									<LayoutDashboard size={16} />
 									<span>Tambah Kategori</span>
 								</button>
 							)}
@@ -178,15 +188,15 @@ export default function Add({ keFalse }: AddProps) {
 									placeholder="Nama kategori baru..."
 									value={newCategoryName}
 									onChange={(e) => setNewCategoryName(e.target.value)}
-									onKeyDown={(e) => {
-										if (e.key === "Enter") {
-											handleAddCategory();
-										}
-										if (e.key === "Escape") {
-											setShowAddCategory(false);
-											setNewCategoryName("");
-										}
-									}}
+									// onKeyDown={(e) => {
+									// 	if (e.key === "Enter") {
+									// 		handleAddCategory();
+									// 	}
+									// 	if (e.key === "Escape") {
+									// 		setShowAddCategory(false);
+									// 		setNewCategoryName("");
+									// 	}
+									// }}
 									autoFocus
 								/>
 								<button
@@ -213,12 +223,13 @@ export default function Add({ keFalse }: AddProps) {
 						className={s.inputDesc}
 						value={task}
 						onChange={(e) => setTask(e.target.value)}
-						placeholder="Masukkan tugas..."
+						placeholder="Apapun itu"
+						
 					/>
 
 					<label className={s.deadlineToggle}>
 						<label htmlFor="deadline-check">
-							<Check />
+							<div className={s.square}></div>
 							<input
 								id="deadline-check"
 								type="checkbox"
@@ -256,8 +267,10 @@ export default function Add({ keFalse }: AddProps) {
 						onClick={async () => {
 							await addTodo();
 						}}
+						
 					>
-						<h1>Tambahkan</h1>
+						
+						<h1><Plus size={16} /> Tambahkan</h1>
 					</button>
 				</div>
 			</div>

@@ -19,37 +19,41 @@ const formatDeadline = (isoString: string) => {
 	return (
 		<span>
 			<span className={s.day}>[{day}] </span>
-			{dd} / {mm} / {yy}
+			<span className={s.date}>
+				{dd} / {mm} / {yy}
+			</span>
 		</span>
 	);
 };
 export default function TodoItem({ todo, isDeleting, onDelete }: Props) {
 	return (
-		<li
-			style={{
-				opacity: isDeleting ? 0 : 1,
-				height: isDeleting ? "0%" : "100%",
-				transition: "opacity 0.3s ease, height 0.3s ease",
-				userSelect: "none",
-			}}
-			className={s.todo_item}
-		>
+		<li className={s.todo_item}>
 			<div className={s.todo_header}>
 				<button
 					className={s.delete_btn}
 					onClick={() => onDelete(todo.id!)}
 					aria-label="Hapus tugas"
 				>
-					<Check />
+					<div className={s.circle}></div>
 				</button>
 			</div>
-			<div className={s.con_task}>
-				<p className={s.con_task}>{todo.task}</p>
+			<div
+				className={s.con_task}
+				style={{
+					opacity: isDeleting ? 0 : 1,
+					height: isDeleting ? "0%" : "100%",
+					transition: "opacity 0.3s ease, height 0.3s ease",
+					userSelect: "none",
+				}}
+			>
+				<p>{todo.task}</p>
 				{todo.deadline && (
 					<p
 						className={`${s.deadline} ${isOverdue(todo.deadline) ? s.overdue : ""}`}
 						style={{
-							color: isOverdue(todo.deadline) ? "var(--danger)" : "var(--ok)",
+							color: isOverdue(todo.deadline)
+								? "var(--danger)"
+								: "var(--ok)",
 						}}
 					>
 						{formatDeadline(todo.deadline)}

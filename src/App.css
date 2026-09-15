@@ -3,20 +3,21 @@
 	src: url("./assets/fonts/degular-semibold.woff2") format("woff2");
 }
 :root {
-	--dark1: #edf6f9;
-	--dark2: #e7f3f6;
+	--dark1: #04050D;
+	--dark2: #0D1117;
 	--dark3: #d4dfe3;
 	--cl4: #141414;
 
-	--gray1: #353535;
+	--gray1: #262626;
 	--gray2: #353535;
-	--cl1: #006d77;
-
-	--light1: #181818;
+	--cl1: #73bcec;
+	--cl2: #f77171;
+	
+	--light1: #F7F7F7;
 
 	--danger: #bc4b51;
 	--warning: #f4a259;
-	--ok: #5b8e7d;
+	--ok: #06d6a0;
 
 	/* --danger: #ef476f;
   --warning: #ffd166;

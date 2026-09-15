@@ -32,8 +32,8 @@
 	width: 100%;
 	display: grid;
 	place-items: center;
-	left: 50%;
-	transform: translateX(-50%);
+	right: 0%;
+	transform: translateX(-0%);
 	z-index: 9999;
 	transition: 0.5s;
 	@media (min-width: 1024px) {
@@ -56,7 +56,7 @@
 	position: fixed;
 	bottom: 0;
 	right:0rem;
-	background-color: var(--cl4);
+	background-color: var(--dark2);
 	z-index: 999;
 	width: fit-content;
 	height: 60px;
@@ -67,7 +67,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	color: var(--dark1);
+	color: var(--cl1);
+	border: 1px solid var(--gray1);
 }
 
 .switch_temperature {
@@ -106,6 +107,7 @@
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	color: var(--light1);
 }
 
 .text_popup {

@@ -14,7 +14,7 @@
 }
 
 .title h1:nth-child(1) {
-	color: var(--cl4);
+	color: var(--light1);
 	/*font-size: clamp(4.5rem, 10vw, 5.5rem);*/
 	font-size: 2rem;
 	font-family: var(--font1);
@@ -24,6 +24,7 @@
 	position: sticky;
 	font-size: 1rem;
 	top: 0;
+	color: var(--light1);
 }
 
 .dates span {
@@ -34,11 +35,13 @@
 	width: 30px;
 	aspect-ratio: 1/1;
 	border: none;
-	background-color: var(--cl4);
+	background-color: var(--dark2);
 	border-radius: 50%;
-	color: var(--dark1);
+	color: var(--cl1);
 	display: grid;
 	place-items: center;
+	border: 1px solid var(--gray1);
+
 }
 
 .suhu {
@@ -48,6 +51,10 @@
 	width: fit-content;
 	margin-top: 0.25rem;
 	font-size: 1.5rem;
+}
+
+:is(.city, .suhu) {
+	color: var(--light1);
 }
 
 .temperature {

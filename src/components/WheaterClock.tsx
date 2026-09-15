@@ -76,7 +76,7 @@ export default function WeatherClock() {
 						<p>Sedang Offline</p>
 					) : (
 						<>
-							<p onClick={() => setGantiKota(true)}>
+							<p className={s.city} onClick={() => setGantiKota(true)}>
 								{weather.country} - {weather.province} - {" "}
 								{weather.city}
 							</p>
