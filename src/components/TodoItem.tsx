@@ -13,7 +13,7 @@ const formatDeadline = (isoString: string) => {
 	const d = new Date(isoString);
 	const dd = d.getDate().toString().padStart(2, "0");
 	const mm = d.toLocaleString("id-ID", { month: "long" });
-	const yy = d.getFullYear().toString().slice(-2);
+	const yy = d.getFullYear().toString();
 	const day = d.toLocaleString("id-ID", { weekday: "long" });
 
 	return (

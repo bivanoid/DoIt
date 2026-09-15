@@ -22,8 +22,7 @@ export function useClock() {
 			const day: number = now.getDay();
 			const date = now.getDate()
 			const month = now
-				.toLocaleString("en-US", { month: "short" })
-				.toUpperCase();
+				.toLocaleString("en-US", { month: "long" });
 			const year = now.getFullYear()
 
 			setClock({
