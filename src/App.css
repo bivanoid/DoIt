@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "degular";
-	src: url("./assets/fonts/degular-semibold.woff2") format("woff2");
+	src: url("./assets/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("woff2");
 }
 :root {
 	--dark1: #04050D;

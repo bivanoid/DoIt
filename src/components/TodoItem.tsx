@@ -1,4 +1,3 @@
-import { Check } from "lucide-react";
 import type { Todo } from "../data/db";
 import s from "./TodoItem.module.css";
 

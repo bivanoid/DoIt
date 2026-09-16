@@ -77,7 +77,7 @@ export default function TodoList({ todos, deletingId, onDelete }: Props) {
 							className={`${s.header_item} ${isDefault ? s.default_category : s.custom_category}`}
 						>
 							<div className={`${s.title_level}`}>
-								<span className={s.category_name}>{categoryName}</span>
+								<span className={s.category_name}><span className={s.hash}># </span>{categoryName}</span>
 							</div>
 							<h1 className={s.count_level}>{items.length}</h1>
 						</div>

@@ -55,6 +55,7 @@
 	background: var(--dark2);
 	border: 1px solid var(--gray1);
 	transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+	cursor: pointer;
 }
 
 .todo_header button:is(:focus, :hover) {
@@ -80,6 +81,7 @@
 
 .con_task {
 	width: 100%;
+	font-weight: bold;
 }
 
 .deadline {

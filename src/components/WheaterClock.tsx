@@ -73,7 +73,7 @@ export default function WeatherClock() {
 			{!menggantiKota && (
 				<div className={s.weather}>
 					{weather.isOffline ? (
-						<p>Sedang Offline</p>
+						<p className={s.offline_text}>Sedang Offline</p>
 					) : (
 						<>
 							<p className={s.city} onClick={() => setGantiKota(true)}>

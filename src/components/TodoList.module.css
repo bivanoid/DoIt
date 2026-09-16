@@ -23,7 +23,7 @@
 	order: 1;
 	position: sticky;
 	top: 0;
-	cursor: pointer;
+	
 	transition: all 0.2s ease;
 	user-select: none;
 	padding-left: 0;
@@ -47,13 +47,18 @@
 }
 
 .count_level {
-	color: var(--cl2);
+	color: var(--cl1);
 }
 
 .title_level {
 	gap: 0.5rem;
 	display: flex;
 	flex: 1;
+	font-weight: bold;
+}
+
+.hash {
+	color: var(--cl2);
 }
 
 .chevron {

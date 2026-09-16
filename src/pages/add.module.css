@@ -16,12 +16,14 @@
 
 .title p {
 	font-size: 2rem;
+	font-weight: bold !important
 }
 
 .title h1 {
 	font-size: 1rem;
 	text-align: center;
 	color: white;
+	font-weight: bold;
 }
 
 .floating_btn {
@@ -226,7 +228,7 @@
 	padding: 1rem;
 	border: none;
 	height: 150px;
-	background-color: var(--dark2);
+	background-color: var(--dark1);
 	border: 1px solid var(--gray1);
 	color: var(--light1);
 	outline: none;

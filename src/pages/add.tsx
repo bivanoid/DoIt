@@ -134,7 +134,7 @@ export default function Add({ keFalse }: AddProps) {
 				}}
 			>
 				<div className={s.title}>
-					<p>Tambah Tugas</p>
+					<p>Buat Baru</p>
 					<button onClick={keFalse} className={s.floating_btn}>
 						<X className={s.logo_x} />
 					</button>
