@@ -2,7 +2,7 @@
 
 A simple task list application
 
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/e2ec0700-f735-43c9-b19d-7d3c75f4e2e0" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/c2ff9dd4-382e-4bef-8f87-6c04775767b6" />
 
 ## Description
 
