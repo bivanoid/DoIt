@@ -67,9 +67,10 @@ export default function WeatherClock() {
 				{/* <h1>Do It!</h1> */}
 				<h1>{clock.time}</h1>
 				<p className={s.dates}>
-					<span>[{clock.day}]</span> {clock.date}
+					<span><span className={s.red}>[</span>{clock.day}<span className={s.red}>]</span></span> {clock.date}
 				</p>
 			</div>
+			<div className="separator"></div>
 			{!menggantiKota && (
 				<div className={s.weather}>
 					{weather.isOffline ? (

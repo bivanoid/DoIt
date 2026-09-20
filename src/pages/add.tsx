@@ -126,7 +126,7 @@ export default function Add({ keFalse }: AddProps) {
 				className={s.items}
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
-					 addTodo()
+						addTodo();
 					}
 					if (e.key === "Escape") {
 						keFalse();
@@ -152,6 +152,9 @@ export default function Add({ keFalse }: AddProps) {
 										}`}
 										onClick={() => setSelectedCategory(category.name)}
 									>
+										{selectedCategory === category.name && (
+											<span className={s.tag}># </span>
+										)}
 										{category.name}
 									</button>
 									{!category.isDefault && (
@@ -224,7 +227,6 @@ export default function Add({ keFalse }: AddProps) {
 						value={task}
 						onChange={(e) => setTask(e.target.value)}
 						placeholder="Apapun itu"
-						
 					/>
 
 					<label className={s.deadlineToggle}>
@@ -267,10 +269,10 @@ export default function Add({ keFalse }: AddProps) {
 						onClick={async () => {
 							await addTodo();
 						}}
-						
 					>
-						
-						<h1><Plus size={16} /> Tambahkan</h1>
+						<h1>
+							<Plus size={16} /> Tambahkan
+						</h1>
 					</button>
 				</div>
 			</div>

@@ -27,12 +27,16 @@
 	position: sticky;
 	font-size: 1rem;
 	top: 0;
-	color: var(--light1);
+	color: var(--gray2);
 	font-weight: bold;
 }
 
 .dates span {
-	color: var(--cl1);
+	color: var(--light1);
+}
+
+.red {
+	color: var(--cl2) !important;
 }
 
 .switch_temperature {
@@ -61,6 +65,12 @@
 :is(.city, .suhu) {
 	color: var(--light1);
 	font-weight: bold;
+}
+
+@media (max-width: 747px) {
+	.suhu {
+		font-size: 1.25rem;
+	}
 }
 
 .temperature {

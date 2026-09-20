@@ -97,7 +97,6 @@
 }
 
 .categoryBtn:hover {
-	border-color: var(--light1);
 	color: var(--cl1);
 }
 
@@ -176,12 +175,6 @@
 .categoryInput::placeholder {
 	color: var(--dark3);
 }
-
-.categoryInput:focus {
-	border-color: var(--cl1);
-	box-shadow: 0 0 0 2px rgba(var(--cl1), 0.1);
-}
-
 .confirmAddBtn,
 .cancelAddBtn {
 	width: 36px;
@@ -195,6 +188,10 @@
 	transition: all 0.2s ease;
 	font-size: 0;
 	background-color: transparent;
+}
+
+.tag {
+	color: var(--cl2);
 }
 
 .confirmAddBtn {
@@ -312,7 +309,6 @@
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	transition: all 0.2s ease;
 }
 
 .deadlineToggle label:hover {

@@ -9,7 +9,7 @@
 	--cl4: #141414;
 
 	--gray1: #262626;
-	--gray2: #353535;
+	--gray2: #7a7a7a;
 	--cl1: #73bcec;
 	--cl2: #f77171;
 	
@@ -52,4 +52,29 @@ a {
 body {
 	width: 100%;
 	background-color: var(--dark1);
+}
+
+.separator {
+	width: 4rem;
+	height: 2px;
+	background-color: var(--cl2);
+	align-self: center;
+	position: relative;
+	display: grid;
+	place-items: center;
+}
+
+.separator::before {
+	content: '';
+	width: 2px;
+	height: 1rem;
+	background-color: var(--cl2);
+	position: absolute;
+}
+
+@media (max-width:747px) {
+	.separator {
+		align-self: flex-start;
+		margin-block: 1rem;
+	}
 }
