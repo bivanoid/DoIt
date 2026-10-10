@@ -2,7 +2,9 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { supabase } from "../../data/db";
 import s from "./login.module.css"
+import { Eye, EyeClosed } from "lucide-react";
 type Mode = "masuk" | "daftar";
+import logo from "../../../public/favicon.svg"
 
 function translateError(message: string): string {
 	const m = message.toLowerCase();
@@ -73,39 +75,40 @@ export default function Login() {
 	};
 
 	return (
-		<main className="login">
+		<main className={s.con_main}>
 			<form className={s.con_form} onSubmit={handleSubmit} noValidate={false}>
-				<h1>{isLogin ? "Masuk ke akun Anda" : "Buat akun baru"}</h1>
+				<img src={logo} />
+				<h1>{isLogin ? "Login to your acconut" : "Create new account"}</h1>
 				{info && (
-					<div className="login__msg login__msg--info" role="status">
+					<div className={s.msg_info} role="status">
 						{info}
 					</div>
 				)}
 				{error && (
-					<div className="login__msg login__msg--error" role="alert">
+					<div className={s.msg_error} role="alert">
 						{error}
 					</div>
 				)}
 
-				<label className="login__field">
+				<label className={s.inp_email}>
 					<span>Email</span>
 					<input
 						type="email"
 						autoComplete="email"
-						placeholder="nama@email.com"
+						placeholder="yourEmail@email.com"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
 					/>
 				</label>
 
-				<label className="login__field">
+				<label className={s.inp_pass}>
 					<span>Password</span>
 					<div className={s.con_input}>
 						<input
 							type={showPassword ? "text" : "password"}
 							autoComplete={isLogin ? "current-password" : "new-password"}
-							placeholder={isLogin ? "Kata sandi Anda" : "Minimal 6 karakter"}
+							placeholder={isLogin ? "Type your password" : "Min 6 Characters"}
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							minLength={6}
@@ -113,24 +116,24 @@ export default function Login() {
 						/>
 						<button
 							type="button"
-							className="login__toggle"
 							onClick={() => setShowPassword((v) => !v)}
 							aria-pressed={showPassword}
 						>
-							{showPassword ? "Sembunyikan" : "Tampilkan"}
+							{showPassword ? (<Eye size={24}/>) : (<EyeClosed size={24}/>) }
 						</button>
 					</div>
 				</label>
 
-				<button className="login__submit" type="submit" disabled={loading}>
-					{loading ? "Memproses..." : isLogin ? "Masuk" : "Daftar"}
+				<button className={s.btn_submit} type="submit" disabled={loading}>
+					{loading ? "Proccessing..." : isLogin ? "Login" : "Register"}
 				</button>
 
 				<button
+					className={s.btn_switch}
 					type="button"
 					onClick={() => switchMode(isLogin ? "daftar" : "masuk")}
 				>
-					{isLogin ? "Daftar" : "Masuk"}
+					{isLogin ? "Register" : "Login"}
 				</button>
 			</form>
 		</main>
