@@ -3,6 +3,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	position: sticky;
 	flex: 1;
 	top: 0;
@@ -39,32 +40,20 @@
 	color: var(--cl2) !important;
 }
 
-.switch_temperature {
-	width: 30px;
-	aspect-ratio: 1/1;
+.logout {
 	border: none;
-	background-color: var(--dark2);
-	border-radius: 50%;
-	color: var(--cl1);
-	display: grid;
-	place-items: center;
-	border: 1px solid var(--gray1);
-
-}
-
-.suhu {
+	width: fit-content;
+	height: fit-content;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	width: fit-content;
-	margin-top: 0.25rem;
-	font-size: 1.5rem;
-	font-weight: bold;
-}
-
-:is(.city, .suhu) {
-	color: var(--light1);
-	font-weight: bold;
+	padding: 0.5rem 1rem;
+	border-radius: 0px;
+	color: var(--cl2);
+	background-color: transparent;
+	font-weight: 600;
+	border: 1px solid var(--cl2);
+	background-color: var(--cl4);
 }
 
 @media (max-width: 747px) {

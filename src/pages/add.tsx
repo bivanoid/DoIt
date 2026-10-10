@@ -1,23 +1,15 @@
 import s from "./add.module.css";
 import { useState, useEffect } from "react";
 import { Check, X, Plus, LayoutDashboard } from "lucide-react";
-import { db, type Category } from "../data/db";
+import { todoApi, categoryApi, type Category } from "../data/db";
 import { scheduleNotification } from "../utils/notif";
-
-//test trigger commit yfyfyttyu
-
-const formatCreatedAt = (): string => {
-	const now = new Date();
-	const day = now.getDate().toString().padStart(2, "0");
-	const month = now.toLocaleString("en-US", { month: "short" }).toUpperCase();
-	return `${day} ${month}`;
-};
 
 type AddProps = {
 	keFalse: () => void;
+	onSaved?: () => void | Promise<void>;
 };
 
-export default function Add({ keFalse }: AddProps) {
+export default function Add({ keFalse, onSaved }: AddProps) {
 	const [task, setTask] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState<string>("Tugas");
 	const [useDeadline, setUseDeadline] = useState(false);
@@ -25,21 +17,27 @@ export default function Add({ keFalse }: AddProps) {
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [newCategoryName, setNewCategoryName] = useState("");
 	const [showAddCategory, setShowAddCategory] = useState(false);
+	const [saving, setSaving] = useState(false);
 	const todayStr = new Date().toISOString().split("T")[0];
 
 	useEffect(() => {
 		const loadCategories = async () => {
-			const cats = await db.categories.toArray();
-			setCategories(cats);
-			if (cats.length > 0) {
-				setSelectedCategory(cats[0].name);
+			try {
+				const cats = await categoryApi.getAll();
+				setCategories(cats);
+				if (cats.length > 0) {
+					setSelectedCategory(cats[0].name);
+				}
+			} catch (error) {
+				console.error("Gagal memuat kategori:", error);
+				alert("Gagal memuat kategori. Periksa koneksi internet Anda.");
 			}
 		};
 		loadCategories();
 	}, []);
 
 	const addTodo = async () => {
-		if (!task || !selectedCategory) return;
+		if (!task || !selectedCategory || saving) return;
 
 		let deadlineISO: string | null = null;
 		if (useDeadline) {
@@ -50,24 +48,34 @@ export default function Add({ keFalse }: AddProps) {
 			deadlineISO = new Date(deadlineDate).toISOString();
 		}
 
-		await db.todos.add({
-			task,
-			category: selectedCategory,
-			status: false,
-			createdAt: formatCreatedAt(),
-			deadline: deadlineISO,
-		});
+		setSaving(true);
+		try {
+			// createdAt tidak dikirim: kolom created_at diisi otomatis oleh database
+			await todoApi.add({
+				task,
+				category: selectedCategory,
+				status: false,
+				deadline: deadlineISO,
+			});
 
-		if (deadlineISO) {
-			await scheduleNotification(task, deadlineISO);
+			if (deadlineISO) {
+				await scheduleNotification(task, deadlineISO);
+			}
+
+			setTask("");
+			setDeadlineDate("");
+			setUseDeadline(false);
+			setNewCategoryName("");
+			setShowAddCategory(false);
+
+			await onSaved?.();
+			keFalse();
+		} catch (error) {
+			console.error("Gagal menyimpan todo:", error);
+			alert("Gagal menyimpan tugas. Coba lagi.");
+		} finally {
+			setSaving(false);
 		}
-
-		setTask("");
-		setDeadlineDate("");
-		setUseDeadline(false);
-		setNewCategoryName("");
-		setShowAddCategory(false);
-		keFalse();
 	};
 
 	const handleAddCategory = async () => {
@@ -82,16 +90,21 @@ export default function Add({ keFalse }: AddProps) {
 			return;
 		}
 
-		await db.categories.add({
-			name: trimmedName,
-			isDefault: false,
-		});
+		try {
+			await categoryApi.add({
+				name: trimmedName,
+				isDefault: false,
+			});
 
-		const updatedCategories = await db.categories.toArray();
-		setCategories(updatedCategories);
-		setSelectedCategory(trimmedName);
-		setNewCategoryName("");
-		setShowAddCategory(false);
+			const updatedCategories = await categoryApi.getAll();
+			setCategories(updatedCategories);
+			setSelectedCategory(trimmedName);
+			setNewCategoryName("");
+			setShowAddCategory(false);
+		} catch (error) {
+			console.error("Gagal menambah kategori:", error);
+			alert("Gagal menambah kategori. Coba lagi.");
+		}
 	};
 
 	const handleDeleteCategory = async (
@@ -111,12 +124,17 @@ export default function Add({ keFalse }: AddProps) {
 		);
 		if (!confirmDelete) return;
 
-		await db.categories.delete(categoryId);
-		const updatedCategories = await db.categories.toArray();
-		setCategories(updatedCategories);
+		try {
+			await categoryApi.remove(categoryId);
+			const updatedCategories = await categoryApi.getAll();
+			setCategories(updatedCategories);
 
-		if (selectedCategory === categoryName && updatedCategories.length > 0) {
-			setSelectedCategory(updatedCategories[0].name);
+			if (selectedCategory === categoryName && updatedCategories.length > 0) {
+				setSelectedCategory(updatedCategories[0].name);
+			}
+		} catch (error) {
+			console.error("Gagal menghapus kategori:", error);
+			alert("Gagal menghapus kategori. Coba lagi.");
 		}
 	};
 
@@ -261,17 +279,17 @@ export default function Add({ keFalse }: AddProps) {
 					<button
 						style={{
 							filter:
-								!task || !selectedCategory
+								!task || !selectedCategory || saving
 									? "saturate(0%)"
 									: "saturate(100%)",
 						}}
-						disabled={!task || !selectedCategory}
+						disabled={!task || !selectedCategory || saving}
 						onClick={async () => {
 							await addTodo();
 						}}
 					>
 						<h1>
-							<Plus size={16} /> Tambahkan
+							<Plus size={16} /> {saving ? "Menyimpan..." : "Tambahkan"}
 						</h1>
 					</button>
 				</div>

@@ -1,7 +1,7 @@
 import { CalendarCheckIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { Todo, Category } from "../data/db";
-import { db } from "../data/db";
+import { categoryApi } from "../data/db";
 import TodoItem from "./TodoItem";
 import s from "./TodoList.module.css";
 
@@ -17,7 +17,7 @@ export default function TodoList({ todos, deletingId, onDelete }: Props) {
 	useEffect(() => {
 		const loadCategories = async () => {
 			try {
-				const cats = await db.categories.toArray();
+				const cats = await categoryApi.getAll();
 				setCategories(cats);
 			} catch (error) {
 				console.error("Error loading categories:", error);
@@ -84,11 +84,12 @@ export default function TodoList({ todos, deletingId, onDelete }: Props) {
 						<div className={s.items_wrapper}>
 							{items.map((todo) => (
 								<TodoItem
+									key={todo.id}
 									todo={todo}
 									isDeleting={deletingId === todo.id}
 									onDelete={onDelete}
 								/>
-							))}
+))}
 						</div>
 					</div>
 				);
